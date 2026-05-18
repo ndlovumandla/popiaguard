@@ -1,0 +1,10 @@
+import { NextResponse } from 'next/server';
+export const ok = <T>(data: T, status = 200) => NextResponse.json({ success: true, data }, { status });
+export const created = <T>(data: T) => NextResponse.json({ success: true, data }, { status: 201 });
+export const noContent = () => new NextResponse(null, { status: 204 });
+export const badRequest = (message = 'Bad request', errors?: unknown) => NextResponse.json({ success: false, message, errors }, { status: 400 });
+export const unauthorized = (message = 'Unauthorized') => NextResponse.json({ success: false, message }, { status: 401 });
+export const forbidden = (message = 'Forbidden') => NextResponse.json({ success: false, message }, { status: 403 });
+export const notFound = (message = 'Not found') => NextResponse.json({ success: false, message }, { status: 404 });
+export const conflict = (message = 'Conflict') => NextResponse.json({ success: false, message }, { status: 409 });
+export const serverError = (message = 'Internal server error') => { console.error('[API]', message); return NextResponse.json({ success: false, message }, { status: 500 }); };
